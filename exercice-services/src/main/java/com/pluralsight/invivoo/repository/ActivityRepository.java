@@ -16,4 +16,6 @@ public interface ActivityRepository {
 
 	void delete(String activityId);
 
+	List<Activity> findByDescription(List<String> descriptions);
+
 }
