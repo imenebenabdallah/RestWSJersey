@@ -23,6 +23,7 @@ import com.pluralsight.invivoo.repository.ActivityRepositoryStub;
 
 @Path("activities")
 public class ActivityResource {
+	//a comment
 	static Logger logger = Logger.getLogger("ActivityResource");
 	private ActivityRepository activityRepository = new ActivityRepositoryStub();
 
