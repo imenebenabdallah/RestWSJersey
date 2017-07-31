@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.pluralsight.invivoo.client.ActivityClientTest
 -------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.758 sec <<< FAILURE!
-testSearch(com.pluralsight.invivoo.client.ActivityClientTest)  Time elapsed: 0.02 sec  <<< ERROR!
+Tests run: 9, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.224 sec <<< FAILURE!
+testSearch(com.pluralsight.invivoo.client.ActivityClientTest)  Time elapsed: 0.017 sec  <<< ERROR!
 javax.ws.rs.NotFoundException: HTTP 404 Not Found
 	at org.glassfish.jersey.client.JerseyInvocation.convertToException(JerseyInvocation.java:913)
 	at org.glassfish.jersey.client.JerseyInvocation.translate(JerseyInvocation.java:822)
@@ -15,7 +15,7 @@ javax.ws.rs.NotFoundException: HTTP 404 Not Found
 	at org.glassfish.jersey.client.JerseyInvocation.invoke(JerseyInvocation.java:689)
 	at org.glassfish.jersey.client.JerseyInvocation$Builder.method(JerseyInvocation.java:405)
 	at org.glassfish.jersey.client.JerseyInvocation$Builder.get(JerseyInvocation.java:301)
-	at com.pluralsight.invivoo.client.ActivitySearchClient.search(ActivitySearchClient.java:32)
+	at com.pluralsight.invivoo.client.ActivitySearchClient.search(ActivitySearchClient.java:31)
 	at com.pluralsight.invivoo.client.ActivityClientTest.testSearch(ActivityClientTest.java:88)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

@@ -11,6 +11,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -36,7 +38,7 @@ public class ActivityResource {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/getActivity/{activityId}") // http:localhost:8080/exercise-services/webapi/activites/getActivity/1234
-	public Activity getActivity(@PathParam("activityId") String activityId) {
+	public Activity getActivityById(@PathParam("activityId") String activityId) {
 		return activityRepository.findActivity(activityId);
 	}
 
@@ -127,5 +129,6 @@ public class ActivityResource {
 		
 		return Response.ok().build();
 	}
+	
 	
 }

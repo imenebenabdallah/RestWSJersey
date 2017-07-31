@@ -16,7 +16,7 @@ import com.pluralsight.invivoo.model.Activity;
 import com.pluralsight.invivoo.repository.ActivityRepository;
 import com.pluralsight.invivoo.repository.ActivityRepositoryStub;
 
-@Path("search/activites")
+@Path("search/activities")
 public class ActivitySearchResource {
 
 	static Logger logger = Logger.getLogger("ActivitySearchResource");
@@ -25,14 +25,35 @@ public class ActivitySearchResource {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response searchActivites(@QueryParam(value = "description") List<String> descriptions) {
-
+		System.out.println("web service call done");
 		logger.info("searching for: " + descriptions.toString());
-		List<Activity> activities = activityRepository.findByDescription(descriptions);
+		List<Activity> activities = activityRepository.findByDescriptions(descriptions);
 		if (activities == null || activities.isEmpty()) {
 			return Response.status(Status.NOT_FOUND).build();
 		}
-		return Response.status(Status.OK).entity(new GenericEntity<List<Activity>>(activities) {}).build();
+		// return Response.status(Status.OK).entity(new
+		// GenericEntity<List<Activity>>(activities) {
+		// }).build();
+		return Response.ok().entity(new GenericEntity<List<Activity>>(activities) {}).build();
 
 	}
+
+	@GET
+	@Path("/getParams")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response searchActivity(@QueryParam(value = "description") String description) {
+		System.out.println("web service call done");
+		logger.info("searching for: " + description);
+		Activity activity = (Activity) activityRepository.findByDescription(description);
+		if (activity == null) {
+			System.out.println(("null activity"));
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		System.out.println("found activity: "+activity.toString());
+		return Response.ok().entity(Activity.class).build();
+
+	}
+	
+
 
 }

@@ -127,24 +127,30 @@ public class ActivityRepositoryStub implements ActivityRepository {
 			}
 		}
 	}
-	
 
 	@Override
-	public List<Activity> findByDescription(List<String> descriptions) {
-		
+	public List<Activity> findByDescriptions(List<String> descriptions) {
+
 		List<Activity> result = new ArrayList<Activity>();
 		for (String description : descriptions) {
 			for (Activity activity : result) {
-				if(activity.getDescription().equals(description)){
+				if (activity.getDescription().equals(description)) {
 					result.add(activity);
 					break;
 				}
 			}
 		}
-		
+
 		return result;
 	}
-	public static void main(String...strings){
-		System.out.println("ça marche");
+
+	@Override
+	public Activity findByDescription(String description) {
+		Activity a = new Activity();
+		for (Activity activity : activities) {
+			if (activity.getDescription().equals(description))
+				return activity;
+		}
+		return a;
 	}
 }

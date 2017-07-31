@@ -22,5 +22,15 @@ public class ActivitySearchClientTest {
 		System.out.println(activities);
 		assertNotNull(activities);
 	}
+	
+	@Test
+	public void testSearchActivityParam() {
+		ActivitySearchClient client = new ActivitySearchClient();
+		String param = "description";
+		String description = "Swimming";
+		Activity activities = client.searchActivity(param, description);
+		System.out.println(activities);
+		assertNotNull(activities);
+	}
 
 }

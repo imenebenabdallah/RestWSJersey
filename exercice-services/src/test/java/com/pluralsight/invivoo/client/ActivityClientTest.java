@@ -89,5 +89,5 @@ public class ActivityClientTest {
 		System.out.println(activities);
 		assertNotNull(activities);
 	}
-
+	
 }
