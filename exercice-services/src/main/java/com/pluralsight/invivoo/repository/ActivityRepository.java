@@ -3,6 +3,7 @@ package com.pluralsight.invivoo.repository;
 import java.util.List;
 
 import com.pluralsight.invivoo.model.Activity;
+import com.pluralsight.invivoo.model.ActivitySearch;
 
 public interface ActivityRepository {
 
@@ -19,5 +20,7 @@ public interface ActivityRepository {
 	List<Activity> findByDescriptions(List<String> descriptions);
 
 	Activity findByDescription(String description);
+
+	List<Activity> findByConstraints(ActivitySearch search);
 
 }

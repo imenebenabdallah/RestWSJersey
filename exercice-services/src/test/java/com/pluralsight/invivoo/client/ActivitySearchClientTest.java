@@ -7,7 +7,10 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.pluralsight.invivoo.client.ActivitySearchClient;
 import com.pluralsight.invivoo.model.Activity;
+import com.pluralsight.invivoo.model.ActivitySearch;
+import com.pluralsight.invivoo.model.ActivitySearchType;
 
 public class ActivitySearchClientTest {
 
@@ -31,6 +34,29 @@ public class ActivitySearchClientTest {
 		Activity activities = client.searchActivity(param, description);
 		System.out.println(activities);
 		assertNotNull(activities);
+	}
+	
+	@Test
+	public void testSearchObject() {
+
+		ActivitySearchClient client = new ActivitySearchClient();
+
+		List<String> searchValues = new ArrayList<String>();
+		searchValues.add("biking");
+		searchValues.add("running");
+
+		ActivitySearch search = new ActivitySearch();
+		search.setDescriptions(searchValues);
+		search.setDurationFrom(30);
+		search.setDurationTo(55);
+		search.setSearchType(ActivitySearchType.SEARCH_BY_DESCRIPTION);
+
+		List<Activity> activities = client.search(search);
+
+		System.out.println(activities);
+
+		assertNotNull(activities);
+
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response.Status;
 import com.pluralsight.invivoo.model.Activity;
 import com.pluralsight.invivoo.repository.ActivityRepository;
 import com.pluralsight.invivoo.repository.ActivityRepositoryStub;
+import com.pluralsight.invivoo.model.ActivitySearch;
 
 @Path("search/activities")
 public class ActivitySearchResource {
@@ -52,6 +54,21 @@ public class ActivitySearchResource {
 		System.out.println("found activity: "+activity.toString());
 		return Response.ok().entity(Activity.class).build();
 
+	}
+	
+	@POST
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	public Response searchForActivities(ActivitySearch search) {
+		System.out.println(search.getDescriptions() + ", " + search.getDurationFrom());
+		
+		List<Activity> activities = activityRepository.findByConstraints(search);
+		
+		if(activities == null || activities.size() <= 0) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
+		return Response.ok().entity(new GenericEntity<List<Activity>> (activities) {}).build();
+		
 	}
 	
 

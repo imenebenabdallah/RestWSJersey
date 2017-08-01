@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pluralsight.invivoo.model.Activity;
+import com.pluralsight.invivoo.model.ActivitySearch;
 import com.pluralsight.invivoo.model.User;
 
 public class ActivityRepositoryStub implements ActivityRepository {
@@ -152,5 +153,24 @@ public class ActivityRepositoryStub implements ActivityRepository {
 				return activity;
 		}
 		return a;
+	}
+	
+	/*******************Find by Criteria*********************/
+
+	@Override
+	public List<Activity> findByConstraints(ActivitySearch search) {
+		System.out.println(search.getDurationTo());
+		System.out.println(search.getSearchType());
+
+		List<Activity> activities = new ArrayList<Activity>();
+
+		Activity activity = new Activity();
+		activity.setId("2345");
+		activity.setDescription("swimming");
+		activity.setDuration(55);
+
+		activities.add(activity);
+
+		return activities;
 	}
 }
