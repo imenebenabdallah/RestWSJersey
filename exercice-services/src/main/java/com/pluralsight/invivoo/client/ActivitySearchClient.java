@@ -28,15 +28,13 @@ public class ActivitySearchClient {
 	List<Activity> search(String param, List<String> searchValues) {
 		// http://localhost:8080/exercise-services/webapi//search/activities?description=swimming&description=running
 
-		URI uri = UriBuilder.fromUri("http://localhost:8080/exercice-services/webapi").path("search/activities").path("getParams")
+		URI uri = UriBuilder.fromUri("http://localhost:8080/exercice-services/webapi").path("search/activities").path("/getParams")
 				.queryParam(param, searchValues).build();
 		System.out.println(uri);
 		WebTarget target = client.target(uri);
-		// Response response =
-		// target.request(MediaType.APPLICATION_JSON).get(Response.class);
-		// if (response.getStatus() != 200)
-		// throw new RuntimeException(response.getStatus() + ": Thsere was an
-		// error on the server!");
+		 Response response = target.request(MediaType.APPLICATION_JSON).get(Response.class);
+		 if (response.getStatus() != 200)
+		 throw new RuntimeException(response.getStatus() + ": Thsere was anerror on the server!");
 
 		List<Activity> activities = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Activity>>() {
 		});
@@ -47,17 +45,19 @@ public class ActivitySearchClient {
 	Activity searchActivity(String param, String searchValue) {
 		// http://localhost:8080/exercise-services/webapi//search/activities?description=swimming&description=running
 
-		URI uri = UriBuilder.fromUri("http://localhost:8080/exercice-services/webapi").path("search/activities")
+		URI uri = UriBuilder.fromUri("http://localhost:8080/exercice-services/webapi").path("search/activities").path("/getActivityWithParams")
 				.queryParam(param, searchValue).build();
 		System.out.println(uri);
 		WebTarget target = client.target(uri);
-		Activity response = target.request(MediaType.APPLICATION_JSON).get(Activity.class);
-		return response;
-		// if (response.getStatus() != 200)
-		// throw new RuntimeException(response.getStatus() + ": There was an
-		// error on the server!");
-		// logger.info(response.toString());
-		// return response.readEntity(Activity.class);
+		Response response = target.request(MediaType.APPLICATION_JSON).get(Response.class);
+		
+		System.out.println("response come to client"+response.getStatus());
+
+		if (response.getStatus() != 200) {
+			throw new RuntimeException(response.getStatus() + ": Thsere was an error on the server!");
+		}
+
+		return response.readEntity(Activity.class);
 
 	}
 
@@ -78,6 +78,27 @@ public class ActivitySearchClient {
 
 	}
 	
+	/************************* Search range *********************/
+	public List<Activity> search (String param, List<String> searchValues, String secondParam, int durationFrom, String thirdParam, int durationTo) {
+		
+		//http://localhost:8080/exercise-services/webapi//search/activities?description=swimming&description=running
+		
+		URI uri = UriBuilder.fromUri("http://localhost:8080/exercice-services/webapi")
+				.path("search/activities").path("/getParamsRange")
+				.queryParam(param, searchValues)
+				.queryParam(secondParam, durationFrom)
+				.queryParam(thirdParam, durationTo)
+				.build();
+		
+		WebTarget target = client.target(uri);
+		
+		List<Activity> response = target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Activity>> () {});
+		
+		System.out.println(response);
+		
+		return response;
+		
+	}
 	/*************** Search by Criteria******************/
 	//client et serveur se mettent en accord sur plus qu'un URL
 	//Criteria est plus forte que des paramètres

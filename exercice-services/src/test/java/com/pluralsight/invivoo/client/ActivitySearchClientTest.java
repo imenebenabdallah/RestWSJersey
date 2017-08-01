@@ -15,7 +15,7 @@ import com.pluralsight.invivoo.model.ActivitySearchType;
 public class ActivitySearchClientTest {
 
 	@Test
-	public void testSearch() {
+	public void testSearchActivities() {
 		ActivitySearchClient client = new ActivitySearchClient();
 		String param = "description";
 		List<String> descriptions = new ArrayList<String>();
@@ -31,8 +31,31 @@ public class ActivitySearchClientTest {
 		ActivitySearchClient client = new ActivitySearchClient();
 		String param = "description";
 		String description = "Swimming";
-		Activity activities = client.searchActivity(param, description);
+		Activity activity = client.searchActivity(param, description);
+		System.out.println(activity);
+		assertNotNull(activity);
+	}
+	
+	@Test
+	public void testSearchRange() {
+		ActivitySearchClient client = new ActivitySearchClient();
+
+		String param = "description";
+		List<String> searchValues = new ArrayList<String>();
+		searchValues.add("swimming");
+		searchValues.add("running");
+
+		String secondParam = "durationFrom";
+		int durationFrom = 30;
+
+		String thirdParam = "durationTo";
+		int durationTo = 55;
+
+		List<Activity> activities = client.search(param, searchValues, secondParam, durationFrom, thirdParam,
+				durationTo);
+
 		System.out.println(activities);
+
 		assertNotNull(activities);
 	}
 	

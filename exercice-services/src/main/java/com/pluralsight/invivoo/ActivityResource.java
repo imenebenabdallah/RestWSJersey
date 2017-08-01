@@ -86,7 +86,7 @@ public class ActivityResource {
 
 	}
 
-	/************** Using Response Object ***************/
+	/************** Get Using Response Object ***************/
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Path("/getActivityResponse/{activityId}") // http:localhost:8080/exercise-services/webapi/activites/getActivity/1234

@@ -21,6 +21,8 @@ public interface ActivityRepository {
 
 	Activity findByDescription(String description);
 
+	List<Activity> findByDescription(List<String> descriptions, int durationFrom, int durationTo);
+
 	List<Activity> findByConstraints(ActivitySearch search);
 
 }

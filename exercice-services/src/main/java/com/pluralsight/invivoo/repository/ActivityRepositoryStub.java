@@ -89,9 +89,7 @@ public class ActivityRepositoryStub implements ActivityRepository {
 
 	}
 
-	private void getActivity() {
-		Activity a = activities.get(0);
-	}
+
 
 	@Override
 	public void createActivity(Activity activity) {
@@ -134,14 +132,16 @@ public class ActivityRepositoryStub implements ActivityRepository {
 
 		List<Activity> result = new ArrayList<Activity>();
 		for (String description : descriptions) {
-			for (Activity activity : result) {
-				if (activity.getDescription().equals(description)) {
+			for (Activity activity : activities) {
+				if (activity.getDescription().equalsIgnoreCase(description)) {
 					result.add(activity);
 					break;
 				}
 			}
 		}
-
+		if(!result.isEmpty())
+		System.out.println("not empty");
+		
 		return result;
 	}
 
@@ -153,6 +153,24 @@ public class ActivityRepositoryStub implements ActivityRepository {
 				return activity;
 		}
 		return a;
+	}
+	
+	/******************* Search range **********************/
+	
+	@Override
+	public List<Activity> findByDescription(List<String> descriptions, int durationFrom, int durationTo) {
+		// select * from activities where description in (?,?,?) and duration > ? and duration < ?
+		
+		List<Activity> activities = new ArrayList<Activity>();
+		
+		Activity activity = new Activity();
+		activity.setId("2345");
+		activity.setDescription("swimming");
+		activity.setDuration(55);
+		
+		activities.add(activity);
+		
+		return activities;
 	}
 	
 	/*******************Find by Criteria*********************/
